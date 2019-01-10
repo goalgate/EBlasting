@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/indexpage"
+    android:orientation="vertical"
+    tools:context=".IndexActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="60px">
+
+        <ImageView
+            android:id="@+id/iv_OnOutlineIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="283px"
+            android:layout_centerVertical="true"
+            android:src="@drawable/outlinedev"/>
+
+        <TextView
+            android:text="15:13:30"
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20px"
+            android:textSize="16px"
+            android:textColor="@color/titleWhite"/>
+
+        <ImageView
+            android:id="@+id/iv_quit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/tv_time"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20px"
+            android:src="@drawable/quit"/>
+
+        <!--<TextView-->
+            <!--android:text="张小小"-->
+            <!--android:id="@+id/tv_nickname"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toStartOf="@id/iv_quit"-->
+            <!--android:layout_marginEnd="30px"-->
+            <!--android:textSize="16px"-->
+            <!--android:textColor="@color/titleWhite"/>-->
+
+        <!--<TextView-->
+            <!--android:text="您好，"-->
+            <!--android:id="@+id/tv_hello"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_toStartOf="@id/tv_nickname"-->
+            <!--android:textSize="16px"-->
+            <!--android:textColor="@color/titleGray" />-->
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60px"
+        android:layout_marginLeft="133px"
+        android:layout_marginRight="133px"
+        android:layout_marginBottom="40px">
+
+
+        <Button
+            android:id="@+id/btn_kaoqinjilu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/selector_kaoqinjilu"
+            />
+
+        <Button
+            android:id="@+id/btn_zhibanriji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btn_kaoqinjilu"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/selector_zhibanriji"
+            />
+
+        <Button
+            android:id="@+id/btn_shebeijiancha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btn_zhibanriji"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/selector_shebeijiancha"/>
+
+        <Button
+            android:id="@+id/btn_zonghejiancha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/btn_shebeijiancha"
+            android:layout_marginBottom="20px"
+            android:background="@drawable/selector_zonghejiancha"/>
+
+        <Button
+            android:id="@+id/btn_peixunjiaoyu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_kaoqinjilu"
+            android:layout_marginRight="20px"
+            android:background="@drawable/selector_peixunjiaoyu" />
+
+        <Button
+            android:id="@+id/btn_wailairenyuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_zhibanriji"
+            android:layout_toRightOf="@id/btn_peixunjiaoyu"
+            android:layout_marginRight="20px"
+            android:background="@drawable/selector_wailairenyuan" />
+
+        <Button
+            android:id="@+id/btn_renyuancaiji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_shebeijiancha"
+            android:layout_toRightOf="@id/btn_wailairenyuan"
+            android:layout_marginRight="20px"
+            android:background="@drawable/selector_renyuancaiji"
+            />
+
+        <Button
+            android:id="@+id/btn_xitongshezhi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_zonghejiancha"
+            android:layout_toRightOf="@id/btn_renyuancaiji"
+            android:background="@drawable/selector_xitongshezhi"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="1100px"
+        android:layout_height="160px"
+        android:layout_marginLeft="133px"
+        android:layout_marginRight="133px"
+        android:background="@drawable/gray_bottom">
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <com.eblasting.UI.AutoRunRecycleView
+            android:id="@+id/rv_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:layout_marginBottom="8px"
+            />
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

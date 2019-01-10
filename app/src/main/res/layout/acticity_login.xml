@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/loginpage"
+    tools:context=".LoginActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+
+    <EditText
+
+        android:singleLine="true"
+        android:id="@+id/et_account"
+        android:layout_width="322px"
+        android:layout_height="42px"
+        android:layout_above="@id/et_password"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="313px"
+        android:layout_marginBottom="21px"
+        android:hint="@string/accountHint"
+        android:textColor="@color/login_et"
+        android:textSize="16px" />
+
+    <EditText
+        android:singleLine="true"
+        android:id="@+id/et_password"
+        android:layout_width="322px"
+        android:layout_height="42px"
+        android:layout_above="@id/btn_login"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="313px"
+        android:layout_marginBottom="21px"
+        android:hint="@string/passwordHint"
+        android:textColor="@color/login_et"
+        android:textSize="16px" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="313px"
+        android:layout_marginBottom="290px"
+        android:background="@drawable/selector_login" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/Copyright"
+        android:layout_marginBottom="15px"
+        android:gravity="center"
+        android:text="@string/version"
+        android:textColor="@color/version"
+        android:textSize="16px" />
+
+    <TextView
+        android:id="@+id/Copyright"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30px"
+        android:gravity="center"
+        android:text="@string/Copyright"
+        android:textColor="@color/Copyright"
+        android:textSize="14px" />
+
+
+</RelativeLayout>
+
+
