@@ -48,10 +48,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".Service.HeaderService"></service>
         <activity android:name=".IndexActivity"
             android:theme="@style/ImageTranslucentTheme">
-
+        </activity>
+        <activity android:name=".WLRYActivity"
+            android:theme="@style/ImageTranslucentTheme">
         </activity>
     </application>
-
 </manifest>

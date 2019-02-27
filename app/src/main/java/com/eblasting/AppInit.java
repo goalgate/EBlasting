@@ -5,9 +5,10 @@ import android.content.Context;
 
 import com.blankj.utilcode.util.Utils;
 import com.squareup.leakcanary.LeakCanary;
+import com.ys.myapi.MyManager;
 
 public class AppInit extends Application {
-    //protected static MyManager manager;
+    protected static MyManager manager;
 
     protected static AppInit instance;
 
@@ -15,9 +16,9 @@ public class AppInit extends Application {
         return instance;
     }
 
-//    public static MyManager getMyManager() {
-//        return manager;
-//    }
+    public static MyManager getMyManager() {
+        return manager;
+    }
 
     public static Context getContext() {
         return getInstance().getApplicationContext();
@@ -35,9 +36,9 @@ public class AppInit extends Application {
 
         LeakCanary.install(this);
 
-//        manager = MyManager.getInstance(this);
-//
-//        manager.bindAIDLService(this);
+        manager = MyManager.getInstance(this);
+
+        manager.bindAIDLService(this);
 
         Utils.init(getContext());
     }

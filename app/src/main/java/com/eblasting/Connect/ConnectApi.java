@@ -16,15 +16,43 @@ public interface ConnectApi {
     @FormUrlEncoded
     @POST("yzb_cjy_updata")
     Observable<ResponseBody> online(@Field("key") String key,
-                                   @Field("dataType") String dataType);
+                                    @Field("dataType") String dataType);
 
     @FormUrlEncoded
     @POST("yzb_cjy_updata")
     Observable<ResponseBody> testNet(@Field("key") String key,
-                                    @Field("dataType") String dataType);
+                                     @Field("dataType") String dataType);
 
 
+    @FormUrlEncoded
+    @POST("yzb_cjy_updata")
+    Observable<ResponseBody> queryPersonInfo(@Field("key") String key,
+                                             @Field("dataType") String dataType,
+                                             @Field("jsonData") String jsonData);
+
+    @FormUrlEncoded
+    @POST("yzb_cjy_updata")
+    Observable<ResponseBody> personInfo(@Field("key") String key,
+                                        @Field("dataType") String dataType,
+                                        @Field("jsonData") String jsonData);
 
 
+    @FormUrlEncoded
+    @POST("yzb_cjy_updata")
+    Observable<ResponseBody> work(@Field("key") String key,
+                                  @Field("dataType") String dataType,
+                                  @Field("jsonData") String jsonData);
+
+    @FormUrlEncoded
+    @POST("yzb_cjy_updata")
+    Observable<ResponseBody> workRecord(@Field("key") String key,
+                                        @Field("dataType") String dataType,
+                                        @Field("jsonData") String jsonData);
+
+    @FormUrlEncoded
+    @POST("yzb_cjy_updata")
+    Observable<ResponseBody> checkDevice(@Field("key") String key,
+                                         @Field("dataType") String dataType,
+                                         @Field("jsonData") String jsonData);
 }
 

@@ -1,7 +1,19 @@
 <resources>
-    <string name="app_name">EBlasting</string>
+    <string name="app_name">易制爆</string>
     <string name="version">当前版本: V.1.0.0</string>
     <string name="Copyright">Copyright广州中爆数字信息科技股份有限公司 All Rights Reserved</string>
     <string name="accountHint">请输入您的账号</string>
     <string name="passwordHint">请输入您的密码</string>
+
+    <string name="name">姓 名</string>
+    <string name="gender">性 别</string>
+    <string name="nation">民 族</string>
+    <string name="birthday">出 生</string>
+    <string name="year">年</string>
+    <string name="month">月</string>
+    <string name="day">日</string>
+    <string name="address">地 址</string>
+    <string name="idno">身份号码</string>
+    <string name="agency">签发机关</string>
+    <string name="expire">有效期</string>
 </resources>

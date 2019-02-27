@@ -56,7 +56,7 @@ public class AutoRunRecycleView extends RecyclerView {
                                 return itemHeight - aLong;
                             }
                         })
-                        .subscribeOn(Schedulers.io())
+                        .subscribeOn(Schedulers.computation())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<Long>() {
                             @Override
@@ -117,9 +117,11 @@ public class AutoRunRecycleView extends RecyclerView {
         return super.onTouchEvent(e);
     }
 
-    public static void release(){
-        disposable.dispose();
-        disposable = null;
+    public static void release() {
+        if (disposable != null) {
+            disposable.dispose();
+            disposable = null;
+        }
     }
 
 
