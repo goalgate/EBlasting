@@ -2,41 +2,41 @@ package com.eblasting.Service;
 
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
+import android.nfc.Tag;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.widget.TableRow;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.eblasting.AppInit;
 import com.eblasting.Connect.DataType;
 import com.eblasting.Connect.MyObserver;
 import com.eblasting.Connect.RetrofitGenerator;
 import com.eblasting.EventBus.TestNetEvent;
-import com.eblasting.EventBus.TimeChangeEvent;
+import com.eblasting.Function.Func_FingerPrint.mvp.Presenter.FingerprintPresenter;
 import com.eblasting.Function.Func_IDCard.mvp.presenter.IDCardPresenter;
-import com.eblasting.HeaderActivity;
-import com.eblasting.R;
-import com.trello.rxlifecycle2.android.ActivityEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import cbdi.log.Lg;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class HeaderService extends Service {
 
+    private static String TAG = "HeaderService";
 
     private SPUtils config = SPUtils.getInstance("config");
+
+    public FingerprintPresenter fpp = FingerprintPresenter.getInstance();
 
     Disposable dis_online;
 
@@ -55,7 +55,10 @@ public class HeaderService extends Service {
         super.onCreate();
         IDCardPresenter.getInstance().idCardOpen();
         EventBus.getDefault().register(this);
+        fpp.fpInit(AppInit.getContext());
+        fpp.fpOpen();
         pollingReady();
+        Lg.e(TAG,"onCreate");
     }
 
     private void pollingReady() {
@@ -116,7 +119,18 @@ public class HeaderService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Lg.e(TAG,"onDestroy");
         IDCardPresenter.getInstance().idCardClose();
+        fpp.fpCancel();
+        Observable.timer(1,TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Long>() {
+                    @Override
+                    public void accept(Long aLong) throws Exception {
+                        fpp.fpClose();
+                    }
+                });
+
         if (dis_testNet != null) {
             dis_testNet.dispose();
         }
@@ -130,7 +144,7 @@ public class HeaderService extends Service {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetTimeChangeEvent(TimeChangeEvent event) {
+    public void onGetTestNetEvent(TestNetEvent event) {
 
     }
 }

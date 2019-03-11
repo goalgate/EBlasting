@@ -1,56 +1,41 @@
 package com.eblasting;
 
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bigkoo.alertview.AlertView;
-import com.bigkoo.alertview.OnItemClickListener;
+import android.view.View;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.AppUtils;
-import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.eblasting.Alerts.AlertExit;
 import com.eblasting.Bean.MsgBean;
-import com.eblasting.Connect.ConnectTest;
-import com.eblasting.Connect.DataType;
-import com.eblasting.Connect.MyObserver;
-import com.eblasting.Connect.RetrofitGenerator;
+import com.eblasting.Service.HeaderService;
 import com.eblasting.Tool.ActivityCollector;
 import com.eblasting.UI.AutoRunRecycleView;
 import com.eblasting.UI.MsgRecycleAdapter;
-import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.components.RxActivity;
-
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import cbdi.log.Lg;
+
 
 public class IndexActivity extends HeaderActivity {
 
+    private static String TAG = "IndexActivity";
 
     @BindView(R.id.rv_recyclerview)
     AutoRunRecycleView rc_view;
 
     @OnClick(R.id.btn_wailairenyuan)
-    void test(){
+    void wailairenyuan(){
         ActivityUtils.startActivity(getPackageName(),getPackageName()+".WLRYActivity");
+    }
+
+    @OnClick(R.id.btn_renyuancaiji)
+    void renyuancaiji(){
+        ActivityUtils.startActivity(getPackageName(),getPackageName()+".RYCJActivity");
     }
 
     @Override
@@ -58,19 +43,25 @@ public class IndexActivity extends HeaderActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
         ButterKnife.bind(this);
+        Lg.e(TAG,"onCreate");
         initDatas();
         recycleViewInit();
+        intent = new Intent(this, HeaderService.class);
+        startService(intent);
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onResume() {
+        super.onResume();
+        iv_back.setVisibility(View.INVISIBLE);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         AutoRunRecycleView.release();
+        stopService(intent);
+
     }
 
     MsgRecycleAdapter adapter;
@@ -90,7 +81,6 @@ public class IndexActivity extends HeaderActivity {
         rc_view.start();
     }
 
-
     List<MsgBean> msgBeanList;
 
     private void initDatas() {
@@ -101,9 +91,19 @@ public class IndexActivity extends HeaderActivity {
         msgBeanList.add(new MsgBean("湖北雪飞化工有限公司购买100千克碳酸钙", "2017-09-03 17:00:00"));
     }
 
-
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        try{
+            new AlertExit(this, new AlertExit.ConfirmListener() {
+                @Override
+                public void confirmBack() {
+                    ActivityCollector.finishAll();
+                    stopService(intent);
+                }
+            }).message("是否注销回到登录界面");
+        }catch (Exception e){
+            ToastUtils.showLong(e.toString());
+            Lg.e(TAG,e.toString());
+        }
     }
 }

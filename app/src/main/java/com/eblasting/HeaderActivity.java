@@ -1,24 +1,20 @@
 package com.eblasting;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bigkoo.alertview.AlertView;
-import com.bigkoo.alertview.OnItemClickListener;
 import com.blankj.utilcode.util.BarUtils;
-import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.eblasting.Alerts.AlertExit;
 import com.eblasting.Connect.ConnectTest;
-import com.eblasting.Connect.DataType;
-import com.eblasting.Connect.MyObserver;
-import com.eblasting.Connect.RetrofitGenerator;
 import com.eblasting.EventBus.TestNetEvent;
-import com.eblasting.EventBus.TimeChangeEvent;
+import com.eblasting.Function.Func_FingerPrint.mvp.Presenter.FingerprintPresenter;
 import com.eblasting.Service.HeaderService;
 import com.eblasting.Tool.ActivityCollector;
 import com.trello.rxlifecycle2.android.ActivityEvent;
@@ -35,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cbdi.log.Lg;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -42,11 +39,13 @@ import io.reactivex.functions.Consumer;
 
 public class HeaderActivity extends RxActivity {
 
+    private static String TAG = "HeaderActivity";
+
     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
     private ConnectTest connectTest = new ConnectTest(this);
 
-    Intent intent;
+    public static Intent intent;
 
     @BindView(R.id.iv_OnOutlineIcon)
     ImageView iv_wifi;
@@ -54,15 +53,28 @@ public class HeaderActivity extends RxActivity {
     @BindView(R.id.tv_time)
     TextView tv_time;
 
+    @BindView(R.id.iv_back)
+    ImageView iv_back;
+
     @OnClick(R.id.iv_quit)
     void quit() {
-        new AlertExit(this, new AlertExit.ConfirmListener() {
-            @Override
-            public void confirmBack() {
-                ActivityCollector.finishAll();
-                stopService(intent);
-            }
-        }).message("是否注销回到登录界面");
+        try{
+            new AlertExit(this, new AlertExit.ConfirmListener() {
+                @Override
+                public void confirmBack() {
+                    ActivityCollector.finishAll();
+                    stopService(intent);
+                }
+            }).message("是否注销回到登录界面");
+        }catch (Exception e){
+            ToastUtils.showLong(e.toString());
+            Lg.e(TAG,e.toString());
+        }
+    }
+
+    @OnClick(R.id.iv_back)
+    void back(){
+        this.finish();
     }
 
     @Override
@@ -80,8 +92,7 @@ public class HeaderActivity extends RxActivity {
                         tv_time.setText(formatter.format(new Date(System.currentTimeMillis())));
                     }
                 });
-        intent = new Intent(this, HeaderService.class);
-        startService(intent);
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -91,11 +102,6 @@ public class HeaderActivity extends RxActivity {
         } else {
             iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.outlinedev));
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onGetTimeChangeEvent(TimeChangeEvent event) {
-        tv_time.setText(event.getTime());
     }
 
     @Override

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 import com.eblasting.R;
-import com.eblasting.Tool.ActivityCollector;
+
 
 public class AlertExit {
 

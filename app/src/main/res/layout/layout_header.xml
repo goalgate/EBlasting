@@ -39,6 +39,15 @@
             android:layout_marginEnd="20px"
             android:src="@drawable/quit"/>
 
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/iv_quit"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20px"
+            android:src="@drawable/back"/>
+
         <!--<TextView-->
         <!--android:text="张小小"-->
         <!--android:id="@+id/tv_nickname"-->

@@ -85,36 +85,9 @@ public class AutoRunRecycleView extends RecyclerView {
 
     //开启:如果正在运行,先停止->再开启
     public void start() {
-        if (running)
-            stop();
         canRun = true;
         running = true;
         postDelayed(autoPollTask, 2000);
-    }
-
-    public void stop() {
-        running = false;
-        removeCallbacks(autoPollTask);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent e) {
-        switch (e.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                break;
-
-            case MotionEvent.ACTION_OUTSIDE:
-                break;
-            case MotionEvent.ACTION_MOVE:
-//                if (running)
-//                    stop();
-                break;
-            case MotionEvent.ACTION_UP:
-//                if (canRun)
-//                    start();
-                break;
-        }
-        return super.onTouchEvent(e);
     }
 
     public static void release() {

@@ -3,6 +3,7 @@ package com.eblasting;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.widget.EditText;
 
 import com.blankj.utilcode.util.ActivityUtils;
@@ -12,6 +13,7 @@ import com.eblasting.Alerts.Alarm;
 import com.eblasting.Connect.DataType;
 import com.eblasting.Connect.MyObserver;
 import com.eblasting.Connect.RetrofitGenerator;
+import com.eblasting.Function.Func_FingerPrint.mvp.Presenter.FingerprintPresenter;
 import com.eblasting.Tool.DESX;
 import com.eblasting.Tool.NetInfo;
 
@@ -77,11 +79,11 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         BarUtils.setStatusBarVisibility(this, false);
         setContentView(R.layout.acticity_login);
-        firstStrat();
+        firstStart();
         ButterKnife.bind(this);
     }
 
-    private void firstStrat(){
+    private void firstStart(){
         if (config.getBoolean("firstStart", true)) {
             JSONObject jsonKey = new JSONObject();
             try {
