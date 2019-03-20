@@ -9,4 +9,6 @@ public class DataType {
     public static String work = "work";
     public static String workRecord = "workRecord";
     public static String checkDevice = "checkDevice";
+    public static String outsidePerson = "outsidePerson";
+    public static String manageCheck = "manageCheck";
 }

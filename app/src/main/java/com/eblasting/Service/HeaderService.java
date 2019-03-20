@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.nfc.Tag;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.TableRow;
 
 import com.blankj.utilcode.util.SPUtils;
@@ -101,11 +102,6 @@ public class HeaderService extends Service {
                                     @Override
                                     public void onResponseWiFiBitmap(boolean status) {
                                         EventBus.getDefault().post(new TestNetEvent(status));
-//                                        if (status) {
-//                                            iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.onlinedev));
-//                                        } else {
-//                                            iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.outlinedev));
-//                                        }
                                     }
                                 }));
 

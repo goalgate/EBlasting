@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.BarUtils;
@@ -43,8 +44,6 @@ public class HeaderActivity extends RxActivity {
 
     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
 
-    private ConnectTest connectTest = new ConnectTest(this);
-
     public static Intent intent;
 
     @BindView(R.id.iv_OnOutlineIcon)
@@ -54,7 +53,7 @@ public class HeaderActivity extends RxActivity {
     TextView tv_time;
 
     @BindView(R.id.iv_back)
-    ImageView iv_back;
+    LinearLayout iv_back;
 
     @OnClick(R.id.iv_quit)
     void quit() {
@@ -70,6 +69,8 @@ public class HeaderActivity extends RxActivity {
             ToastUtils.showLong(e.toString());
             Lg.e(TAG,e.toString());
         }
+
+
     }
 
     @OnClick(R.id.iv_back)
@@ -92,15 +93,17 @@ public class HeaderActivity extends RxActivity {
                         tv_time.setText(formatter.format(new Date(System.currentTimeMillis())));
                     }
                 });
-
     }
-
+    boolean networkstate;
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onGetTestNetEvent(TestNetEvent event) {
         if (event.isTestStatus()) {
             iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.onlinedev));
+            networkstate = true;
         } else {
+
             iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.outlinedev));
+            networkstate = false;
         }
     }
 

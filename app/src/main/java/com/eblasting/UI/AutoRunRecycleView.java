@@ -29,14 +29,14 @@ public class AutoRunRecycleView extends RecyclerView {
 
     final static int itemHeight = 48 - 1;
 
-    static Disposable disposable;
+    Disposable disposable;
 
     public AutoRunRecycleView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         autoPollTask = new AutoPollTask(this);
     }
 
-    static class AutoPollTask implements Runnable {
+    class AutoPollTask implements Runnable {
         private final WeakReference<AutoRunRecycleView> mReference;
 
         //使用弱引用持有外部类引用->防止内存泄漏
@@ -90,7 +90,7 @@ public class AutoRunRecycleView extends RecyclerView {
         postDelayed(autoPollTask, 2000);
     }
 
-    public static void release() {
+    public void release() {
         if (disposable != null) {
             disposable.dispose();
             disposable = null;

@@ -48,7 +48,6 @@ public class FingerprintPresenter {
 
     }
 
-
     public void fpCancel(){
         fpModule.onCancel();
     }
@@ -101,8 +100,6 @@ public class FingerprintPresenter {
                     view.onSetImg(bmp);
                 }
             }
-
-
 
             @Override
             public void onText(String msg) {

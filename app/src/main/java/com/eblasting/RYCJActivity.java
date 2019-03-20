@@ -91,6 +91,9 @@ public class RYCJActivity extends HeaderActivity implements IIDCardView, IFinger
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rycj);
         ButterKnife.bind(this);
+        if (getIntent().getExtras().getBoolean("network")){
+            iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.onlinedev));
+        }
         RxView.clicks(iv_fpPhoto).throttleFirst(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Object>() {
@@ -124,6 +127,7 @@ public class RYCJActivity extends HeaderActivity implements IIDCardView, IFinger
 
                     }
                 });
+
     }
 
     @Override

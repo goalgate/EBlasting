@@ -3,6 +3,7 @@ package com.eblasting.Connect;
 import android.content.Context;
 
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ToastUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -159,6 +160,44 @@ public class ConnectTest {
                 .subscribe(new MyObserver(context, DataType.checkDevice, new MyObserver.Callback() {
                     @Override
                     public void onResponseJsonObject(JSONObject jsonObject) {
+
+                    }
+
+                    @Override
+                    public void onResponseWiFiBitmap(boolean status) {
+
+                    }
+                }));
+    }
+
+    public void outsidePerson(){
+        JSONObject data = new JSONObject();
+        try {
+            data.put("id", "test12345");
+            data.put("name", "王振文");
+            data.put("identity", "441302199308100538");
+            data.put("affair","送货上门");
+            data.put("headPhoto", "test12345");
+            data.put("photo", "test12345");
+            data.put("time", "test12345");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RetrofitGenerator.getConnectApi()
+                .outsidePerson(config.getString("key"), DataType.outsidePerson, data.toString())
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MyObserver(context, DataType.outsidePerson, new MyObserver.Callback() {
+                    @Override
+                    public void onResponseJsonObject(JSONObject jsonObject) {
+                        try {
+                            if (jsonObject.getString("result").equals("true")) {
+                                ToastUtils.showLong("true");
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
 
                     }
 

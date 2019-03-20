@@ -15,38 +15,49 @@
             android:id="@+id/iv_OnOutlineIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="283px"
             android:layout_centerVertical="true"
-            android:src="@drawable/outlinedev"/>
+            android:layout_marginStart="283px"
+            android:src="@drawable/outlinedev" />
 
         <TextView
-            android:text="15:13:30"
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="20px"
-            android:textSize="16px"
-            android:textColor="@color/titleWhite"/>
+            android:text="15:13:30"
+            android:textColor="@color/titleWhite"
+            android:textSize="16px" />
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/iv_quit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_toStartOf="@id/tv_time"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="20px"
-            android:src="@drawable/quit"/>
+            android:layout_height="60dp">
 
-        <ImageView
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20px"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/quit" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/iv_back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_toStartOf="@id/iv_quit"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="20px"
-            android:src="@drawable/back"/>
+            android:layout_height="60dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20px"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/back" />
+        </LinearLayout>
 
         <!--<TextView-->
         <!--android:text="张小小"-->

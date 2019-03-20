@@ -95,7 +95,7 @@ public class LoginActivity extends Activity {
             config.put("firstStart", false);
             config.put("daid", new NetInfo().getMacId());
             config.put("key", DESX.encrypt(jsonKey.toString()));
-            config.put("ServerId", "http://192.168.12.69:7001/daServer/");
+            config.put("ServerId", "http://192.168.12.214:7001/EBlasting/");
         }
     }
 

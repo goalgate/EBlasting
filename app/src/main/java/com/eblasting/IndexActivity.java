@@ -1,6 +1,7 @@
 package com.eblasting;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,12 +31,16 @@ public class IndexActivity extends HeaderActivity {
 
     @OnClick(R.id.btn_wailairenyuan)
     void wailairenyuan(){
-        ActivityUtils.startActivity(getPackageName(),getPackageName()+".WLRYActivity");
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("network",networkstate);
+        ActivityUtils.startActivity(bundle,getPackageName(),getPackageName()+".WLRYActivity");
     }
 
     @OnClick(R.id.btn_renyuancaiji)
     void renyuancaiji(){
-        ActivityUtils.startActivity(getPackageName(),getPackageName()+".RYCJActivity");
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("network",networkstate);
+        ActivityUtils.startActivity(bundle,getPackageName(),getPackageName()+".RYCJActivity");
     }
 
     @Override
@@ -48,18 +53,22 @@ public class IndexActivity extends HeaderActivity {
         recycleViewInit();
         intent = new Intent(this, HeaderService.class);
         startService(intent);
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         iv_back.setVisibility(View.INVISIBLE);
+        if(networkstate){
+            iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.onlinedev));
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        AutoRunRecycleView.release();
+        rc_view.release();
         stopService(intent);
 
     }

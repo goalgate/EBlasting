@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".WLRYActivity">
 
     <include
@@ -18,237 +20,277 @@
         android:gravity="center"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="480dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:gravity="center_horizontal">
 
-        <RelativeLayout
-            android:layout_width="480dip"
-            android:layout_height="310dip"
-
-            android:layout_marginLeft="0dip"
-            android:layout_marginTop="40dip"
-            android:background="@drawable/idcard">
-
-            <LinearLayout
-                android:layout_width="270dip"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="30dip">
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:text="@string/name" />
-
-                    <TextView
-                        android:id="@+id/tv_IDName"
-                        style="@style/CardInfoText"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:layout_weight="1.0" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dip">
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:text="@string/gender" />
-
-                    <TextView
-                        android:id="@+id/tv_IDGender"
-                        style="@style/CardInfoText"
-                        android:layout_width="40dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip" />
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:text="@string/nation" />
-
-                    <TextView
-                        android:id="@+id/tv_IDNation"
-                        style="@style/CardInfoText"
-                        android:layout_width="80dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dip">
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:text="@string/birthday" />
-
-                    <TextView
-                        android:id="@+id/tv_IDYear"
-                        style="@style/CardInfoText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip" />
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="20dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dip"
-                        android:text="@string/year" />
-
-                    <TextView
-                        android:id="@+id/tv_IDMonth"
-                        style="@style/CardInfoText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip" />
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="20dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dip"
-                        android:text="@string/month" />
-
-                    <TextView
-                        android:id="@+id/tv_IDDay"
-                        style="@style/CardInfoText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip" />
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="20dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dip"
-                        android:text="@string/day" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dip">
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="50dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:text="@string/address" />
-
-                    <TextView
-                        android:id="@+id/tv_IDAddress"
-                        style="@style/CardInfoText"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:layout_weight="1.0"
-                        android:padding="5dip" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="5dip">
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="60dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-                        android:text="@string/agency"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_IDAgency"
-                        style="@style/CardInfoText"
-                        android:layout_width="0dip"
-                        android:layout_height="20dip"
-                        android:layout_weight="1.0"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="5dip">
-
-                    <TextView
-                        style="@style/CardInfoTitle"
-                        android:layout_width="60dip"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dip"
-
-                        android:text="@string/expire" />
-
-                    <TextView
-                        android:id="@+id/textViewExpire"
-                        style="@style/CardInfoText"
-                        android:layout_width="0dip"
-                        android:layout_height="20dip"
-                        android:layout_weight="1.0" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iv_IDHeadphoto"
-                android:layout_width="170dip"
-                android:layout_height="190dip"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="40dip"
-                android:layout_marginRight="40dip"
-                android:contentDescription="@null"
-                android:src="@null" />
-
-            <LinearLayout
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="25dip"
-                android:layout_marginBottom="35dip">
+                android:layout_marginRight="20dp"
+                android:text="来访事由："
+                android:textColor="#fff"
+                android:textSize="10pt" />
 
-                <TextView
-                    style="@style/CardInfoTitle"
+            <EditText
+                android:id="@+id/et_visit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="请输入来访事由"
+                android:paddingLeft="20dp"
+                android:textColor="#9fb0cc"
+                android:textSize="10pt" />
+
+            <ImageView
+                android:id="@+id/iv_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="1000dp"
+            android:layout_height="310dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dip">
+
+            <SurfaceView
+                android:id="@+id/sview_Camera"
+                android:layout_width="480dp"
+                android:layout_height="310dp"
+                android:layout_marginRight="40dp" />
+
+            <RelativeLayout
+                android:layout_width="480dip"
+                android:layout_height="310dip"
+
+                android:background="@drawable/idcard">
+
+                <LinearLayout
+                    android:layout_width="270dip"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dip">
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="@string/name" />
+
+                        <TextView
+                            android:id="@+id/tv_IDName"
+                            style="@style/CardInfoText"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_weight="1.0" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dip">
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="@string/gender" />
+
+                        <TextView
+                            android:id="@+id/tv_IDGender"
+                            style="@style/CardInfoText"
+                            android:layout_width="40dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip" />
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="@string/nation" />
+
+                        <TextView
+                            android:id="@+id/tv_IDNation"
+                            style="@style/CardInfoText"
+                            android:layout_width="80dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dip">
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="@string/birthday" />
+
+                        <TextView
+                            android:id="@+id/tv_IDYear"
+                            style="@style/CardInfoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip" />
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dip"
+                            android:text="@string/year" />
+
+                        <TextView
+                            android:id="@+id/tv_IDMonth"
+                            style="@style/CardInfoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip" />
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dip"
+                            android:text="@string/month" />
+
+                        <TextView
+                            android:id="@+id/tv_IDDay"
+                            style="@style/CardInfoText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip" />
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="20dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dip"
+                            android:text="@string/day" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dip">
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="@string/address" />
+
+                        <TextView
+                            android:id="@+id/tv_IDAddress"
+                            style="@style/CardInfoText"
+                            android:layout_width="0dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:layout_weight="1.0"
+                            android:padding="5dip" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text="@string/agency" />
+
+                        <TextView
+                            android:id="@+id/tv_IDAgency"
+                            style="@style/CardInfoText"
+                            android:layout_width="0dip"
+                            android:layout_height="20dip"
+                            android:layout_weight="1.0" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/CardInfoTitle"
+                            android:layout_width="60dip"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+
+                            android:text="@string/expire" />
+
+                        <TextView
+                            android:id="@+id/textViewExpire"
+                            style="@style/CardInfoText"
+                            android:layout_width="0dip"
+                            android:layout_height="20dip"
+                            android:layout_weight="1.0" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_IDHeadphoto"
+                    android:layout_width="170dip"
+                    android:layout_height="190dip"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="40dip"
+                    android:layout_marginRight="40dip"
+                    android:contentDescription="@null"
+                    android:src="@null" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dip"
-                    android:text="@string/idno" />
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="25dip"
+                    android:layout_marginBottom="35dip">
 
-                <TextView
-                    android:id="@+id/tv_IDCardID"
-                    style="@style/CardInfoText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dip"
-                    android:ellipsize="middle"
-                    android:hint=""
-                    android:singleLine="true"
-                    android:text="" />
-            </LinearLayout>
-        </RelativeLayout>
+                    <TextView
+                        style="@style/CardInfoTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:text="@string/idno" />
 
+                    <TextView
+                        android:id="@+id/tv_IDCardID"
+                        style="@style/CardInfoText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dip"
+                        android:ellipsize="middle"
+                        android:hint=""
+                        android:singleLine="true"
+                        android:text="" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
-
 </FrameLayout>

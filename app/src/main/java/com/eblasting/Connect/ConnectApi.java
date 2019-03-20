@@ -54,5 +54,17 @@ public interface ConnectApi {
     Observable<ResponseBody> checkDevice(@Field("key") String key,
                                          @Field("dataType") String dataType,
                                          @Field("jsonData") String jsonData);
+
+    @FormUrlEncoded
+    @POST("yzb_cjy_updata")
+    Observable<ResponseBody> outsidePerson(@Field("key") String key,
+                                         @Field("dataType") String dataType,
+                                         @Field("jsonData") String jsonData);
+
+    @FormUrlEncoded
+    @POST("yzb_cjy_updata")
+    Observable<ResponseBody> manageCheck(@Field("key") String key,
+                                           @Field("dataType") String dataType,
+                                           @Field("jsonData") String jsonData);
 }
 

@@ -1,6 +1,8 @@
 package com.eblasting.Connect;
 
 import android.content.Context;
+import android.util.Log;
+
 import com.eblasting.Alerts.Alarm;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,9 +55,11 @@ public class MyObserver implements Observer<ResponseBody> {
 
     @Override
     public void onError(Throwable e) {
+        if (dataType.equals(DataType.testNet)){
+            returnFalse();
+        }
         if(!(dataType.equals(DataType.online)||dataType.equals(DataType.testNet))){
             Alarm.getInstance(context).message("无法连接到网络，请检查设备联网情况");
-
         }
 
     }
@@ -82,6 +86,7 @@ public class MyObserver implements Observer<ResponseBody> {
     private void returnFalse() {
         if (dataType.equals(DataType.testNet)) {
             callback.onResponseWiFiBitmap(false);
+            Log.e("callback","false");
         } else if (dataType.equals(DataType.online)) {
 
         } else if (dataType.equals(DataType.Login)){
