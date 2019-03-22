@@ -58,5 +58,8 @@
         <activity android:name=".RYCJActivity"
             android:theme="@style/ImageTranslucentTheme">
         </activity>
+        <activity android:name=".KQJLActivity"
+            android:theme="@style/ImageTranslucentTheme">
+        </activity>
     </application>
 </manifest>

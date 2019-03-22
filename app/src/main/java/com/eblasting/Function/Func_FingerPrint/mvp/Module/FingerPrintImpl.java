@@ -759,24 +759,22 @@ public class FingerPrintImpl implements IFingerPrint {
         }
     };
 
-
+    String temp;
     @Override
-    public void onUpTemplate(String id, IFPListener2 listener) {
+    public String onUpTemplate(String id, IFPListener2 listener) {
         int w_nRet;
         byte[] w_pTemplate = new byte[DevComm1.MAX_DATA_LEN];
 
         // Check USB Connection
         if (!m_usbComm.IsInit())
-            return;
+            return null;
 
         // Check User ID
         if (!CheckUserID(id))
-            return;
+            return null;
 
         do {
-//            listener.onEnableCtrl(false);
-//            listener.onBtnCloseEnable(false);
-//            listener.onBtnCancelEnable(true);
+
 
             // Load Template to Buffer
             w_nRet = m_usbComm.Run_LoadChar((short) m_nUserID, 0);
@@ -791,6 +789,8 @@ public class FingerPrintImpl implements IFingerPrint {
                 listener.onText(GetErrorMsg(w_nRet));
                 break;
             }
+            temp = Base64.encodeToString(w_pTemplate, Base64.DEFAULT);
+
 
             ////////////////////////////////////////////////////////////////////
             // Save Template (/FPData/01.fpt)
@@ -810,8 +810,6 @@ public class FingerPrintImpl implements IFingerPrint {
                 }
             }
 
-            String s = Base64.encodeToString(w_pTemplate, Base64.DEFAULT);
-            byte[] bytes = Base64.decode(s, Base64.DEFAULT);
 
             // Save Template Data
             FileOutputStream w_foTemplate = null;
@@ -821,19 +819,84 @@ public class FingerPrintImpl implements IFingerPrint {
                 w_foTemplate.write(w_pTemplate, 0, DevComm1.MAX_DATA_LEN);
                 w_foTemplate.close();
                 // Show Status
-                listener.onText(String.format("Result : Get Template Success.\r\nDir : %s", w_szSaveDirPath + "/" + String.valueOf(m_nUserID) + ".fpt"));
+                //   listener.onText(String.format("Result : Get Template Success.\r\nDir : %s", w_szSaveDirPath + "/" + String.valueOf(m_nUserID) + ".fpt"));
                 break;
             } catch (Exception e) {
                 e.printStackTrace();
             }
             ////////////////////////////////////////////////////////////////////
 
-            listener.onText(String.format("Result : Get Template Success.\r\nSave Template Failed."));
+            //listener.onText(String.format("Result : Get Template Success.\r\nSave Template Failed."));
         } while (false);
 
-//        listener.onEnableCtrl(true);
-//        listener.onBtnCloseEnable(true);
-//        listener.onBtnCancelEnable(false);
+        return temp;
+    }
+
+    @Override
+    public void onDownTemplate(String id,String temp, IFPListener2 listener) {
+        int w_nRet;
+        int[] w_nDupTmplNo = new int[1];
+        byte[] w_pTemplate = new byte[DevComm1.MAX_DATA_LEN];
+
+        // Check USB Connection
+        if (!m_usbComm.IsInit())
+            return;
+
+        // Check User ID
+        if (!CheckUserID(id))
+            return;
+
+        ////////////////////////////////////////////////////////////////////
+        // Load Template (/FPData/01.fpt)
+        // Check Directory
+        /*String w_szLoadDirPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/FPData";
+        File w_fpDir = new File(w_szLoadDirPath);
+        if (!w_fpDir.exists()) {
+            listener.onText(String.format("Result : Can't load template data.\r\nDir : %s", w_szLoadDirPath + "/" + String.valueOf(m_nUserID) + ".fpt"));
+            return;
+        }
+
+        // Check Template File
+        File w_fpTemplate = new File(w_szLoadDirPath + "/" + String.valueOf(m_nUserID) + ".fpt");
+        if (!w_fpTemplate.exists()) {
+            listener.onText(String.format("Result : Can't load template data.\r\nDir : %s", w_szLoadDirPath + "/" + String.valueOf(m_nUserID) + ".fpt"));
+            return;
+        }*/
+
+        /*// Load Template Data
+        FileInputStream w_fiTemplate = null;
+        try {
+            w_fiTemplate = new FileInputStream(w_fpTemplate);
+            w_fiTemplate.read(w_pTemplate, 0, DevComm.GD_RECORD_SIZE);
+            w_fiTemplate.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            listener.onText(String.format("Result : Can't load template data.\r\nDir : %s", w_szLoadDirPath + "/" + String.valueOf(m_nUserID) + ".fpt"));
+            return;
+        }*/
+        ////////////////////////////////////////////////////////////////////
+        w_pTemplate = Base64.decode(temp,Base64.DEFAULT);
+        do {
+            // Download Template to Buffer
+            w_nRet = m_usbComm.Run_DownChar(0, w_pTemplate);
+            if (w_nRet != DevComm1.ERR_SUCCESS) {
+                listener.onText(GetErrorMsg(w_nRet));
+                break;
+            }
+
+            // Store Template
+            w_nRet = m_usbComm.Run_StoreChar(m_nUserID, 0, w_nDupTmplNo);
+            if (w_nRet != DevComm1.ERR_SUCCESS) {
+                if (w_nRet == DevComm1.ERR_DUPLICATION_ID) {
+                    listener.onText(String.format("Result : Fail\r\nDuplication ID = %d", w_nDupTmplNo[0]));
+                } else {
+                    listener.onText(GetErrorMsg(w_nRet));
+                }
+                break;
+            }
+
+            listener.onText(String.format("Result : Set Template Success.\r\nUserID = %d", m_nUserID));
+        } while (false);
     }
 
     @Override

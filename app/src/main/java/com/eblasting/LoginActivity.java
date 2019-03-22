@@ -69,6 +69,11 @@ public class LoginActivity extends Activity {
                         public void onResponseWiFiBitmap(boolean status) {
 
                         }
+
+                        @Override
+                        public void onConnectError() {
+
+                        }
                     }));
         }
 
@@ -95,7 +100,7 @@ public class LoginActivity extends Activity {
             config.put("firstStart", false);
             config.put("daid", new NetInfo().getMacId());
             config.put("key", DESX.encrypt(jsonKey.toString()));
-            config.put("ServerId", "http://192.168.12.214:7001/EBlasting/");
+            config.put("ServerId", "http://192.168.12.215:7001/EBlasting/");
         }
     }
 

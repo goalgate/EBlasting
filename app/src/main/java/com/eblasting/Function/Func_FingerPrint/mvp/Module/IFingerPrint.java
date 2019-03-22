@@ -21,9 +21,10 @@ public interface IFingerPrint {
     void onCaptureImg(IFPListener2 listener);
     void onRemoveTmpl(String TmplId, IFPListener2 listener);
     void onRemoveAll(IFPListener2 listener);
-    void onUpTemplate(String id, IFPListener2 listener);
+    String onUpTemplate(String id, IFPListener2 listener);
     void onDownTemplate(String id, IFPListener2 listener);
-//    void onReset( Activity activity);
+    void onDownTemplate(String id,String temp,IFPListener2 listener);
+    //    void onReset( Activity activity);
     void onReSetUSB();
 
     interface IFPListener{

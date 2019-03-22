@@ -61,6 +61,7 @@ public class MyObserver implements Observer<ResponseBody> {
         if(!(dataType.equals(DataType.online)||dataType.equals(DataType.testNet))){
             Alarm.getInstance(context).message("无法连接到网络，请检查设备联网情况");
         }
+        callback.onConnectError();
 
     }
 
@@ -73,6 +74,8 @@ public class MyObserver implements Observer<ResponseBody> {
         void onResponseJsonObject(JSONObject jsonObject);
 
         void onResponseWiFiBitmap(boolean status);
+
+        void onConnectError();
     }
 
     private void returnTrue(JSONObject jsonObject) {
@@ -86,7 +89,6 @@ public class MyObserver implements Observer<ResponseBody> {
     private void returnFalse() {
         if (dataType.equals(DataType.testNet)) {
             callback.onResponseWiFiBitmap(false);
-            Log.e("callback","false");
         } else if (dataType.equals(DataType.online)) {
 
         } else if (dataType.equals(DataType.Login)){

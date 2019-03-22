@@ -81,6 +81,11 @@ public class HeaderService extends Service {
                                     public void onResponseWiFiBitmap(boolean status) {
 
                                     }
+
+                                    @Override
+                                    public void onConnectError() {
+
+                                    }
                                 }));
                     }
                 });
@@ -102,6 +107,11 @@ public class HeaderService extends Service {
                                     @Override
                                     public void onResponseWiFiBitmap(boolean status) {
                                         EventBus.getDefault().post(new TestNetEvent(status));
+                                    }
+
+                                    @Override
+                                    public void onConnectError() {
+
                                     }
                                 }));
 

@@ -84,8 +84,12 @@ public class FingerprintPresenter {
         fpModule.onRemoveAll(getFpListener());
     }
 
-    public void fpUpTemplate(String id) { fpModule.onUpTemplate(id,getFpListener());}
+    //public void fpUpTemplate(String id) { fpModule.onUpTemplate(id,getFpListener());}
+    public String fpUpTemlate(String id) {
+        return fpModule.onUpTemplate(id, getFpListener());
+    }
 
+    public void fpDownTemplate(String id,String temp) { fpModule.onDownTemplate(id,temp,getFpListener());}
     public void fpDownTemplate(String id) { fpModule.onDownTemplate(id,getFpListener());}
 
     public void fpReSetUSB() { fpModule.onReSetUSB();}

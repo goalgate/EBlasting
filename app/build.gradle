@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.greenrobot.greendao'
 android {
     compileSdkVersion 27
     defaultConfig {
@@ -32,6 +32,13 @@ buildscript {
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
     }
 }
+greendao {
+    schemaVersion 1//数据库版本号
+    daoPackage 'com.eblasting.greendao'//设置DaoMaster、DaoSession、Dao包名
+    targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
+    //targetGenDirTest：设置生成单元测试目录
+    //generateTests：设置自动生成单元测试用例
+}
 def retrofitVersion = '2.2.0'
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -60,5 +67,7 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'org.greenrobot:greendao:3.2.2'
+    implementation 'org.greenrobot:greendao-generator:3.2.2'
     implementation files('libs/BASE64.jar')
 }

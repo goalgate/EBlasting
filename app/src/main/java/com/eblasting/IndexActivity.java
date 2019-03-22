@@ -29,6 +29,13 @@ public class IndexActivity extends HeaderActivity {
     @BindView(R.id.rv_recyclerview)
     AutoRunRecycleView rc_view;
 
+    @OnClick(R.id.btn_kaoqinjilu)
+    void kaoqinjilu(){
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("network",networkstate);
+        ActivityUtils.startActivity(bundle,getPackageName(),getPackageName()+".KQJLActivity");
+    }
+
     @OnClick(R.id.btn_wailairenyuan)
     void wailairenyuan(){
         Bundle bundle = new Bundle();

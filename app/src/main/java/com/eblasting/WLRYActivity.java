@@ -25,19 +25,27 @@ import com.eblasting.Function.Func_IDCard.mvp.presenter.IDCardPresenter;
 import com.eblasting.Function.Func_IDCard.mvp.view.IIDCardView;
 import com.eblasting.Tool.FileUtils;
 import com.google.gson.JsonArray;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cbdi.drv.card.ICardInfo;
 import cbdi.log.Lg;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoView {
@@ -85,6 +93,8 @@ public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoV
     @BindView(R.id.sview_Camera)
     SurfaceView surfaceView;
 
+    Disposable disposableTips;
+
     @OnClick(R.id.iv_list)
     void listReason() {
         try {
@@ -96,7 +106,12 @@ public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoV
                         this, AlertView.Style.ActionSheet, new OnItemClickListener() {
                     @Override
                     public void onItemClick(Object o, int position) {
-                        et_visit.setText(reasonArray[position]);
+                        try {
+                            et_visit.setText(reasonArray[position]);
+                        }catch (ArrayIndexOutOfBoundsException e){
+                            e.printStackTrace();
+                        }
+
                     }
                 }).show();
             } else {
@@ -125,6 +140,15 @@ public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoV
         if (getIntent().getExtras().getBoolean("network")){
             iv_wifi.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.onlinedev));
         }
+        disposableTips = RxTextView.textChanges(tv_name)
+                .debounce(30, TimeUnit.SECONDS)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<CharSequence>() {
+                    @Override
+                    public void accept(CharSequence charSequence) throws Exception {
+                        messageClear();
+                    }
+                });
     }
 
     @Override
@@ -163,6 +187,7 @@ public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoV
         super.onDestroy();
         pp.close_Camera();
         Alarm.getInstance(this).release();
+        disposableTips.dispose();
     }
 
     @Override
@@ -225,7 +250,7 @@ public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoV
                     public void onResponseJsonObject(JSONObject jsonObject) {
                         try {
                             if (jsonObject.getString("result").equals("true")) {
-                                ToastUtils.showLong("来访人员信息已上传");
+                                Alarm.getInstance(WLRYActivity.this).message("来访人员信息已上传");
                                 String reason = reason_sp.getString("reason");
                                 Set set = new HashSet();
                                 String[] reasonArray = reason.split(",");
@@ -247,6 +272,11 @@ public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoV
                     public void onResponseWiFiBitmap(boolean status) {
 
                     }
+
+                    @Override
+                    public void onConnectError() {
+
+                    }
                 }));
     }
 
@@ -255,7 +285,17 @@ public class WLRYActivity extends HeaderActivity implements IIDCardView, IPhotoV
         if (!TextUtils.isEmpty(et_visit.getText().toString())) {
             iv_headphoto.setImageBitmap(bmp);
         }
-
+    }
+    private void messageClear(){
+        tv_name.setText(null);
+        tv_gender.setText(null);
+        tv_nation.setText(null);
+        tv_year.setText(null);
+        tv_month.setText(null);
+        tv_day.setText(null);
+        tv_address.setText(null);
+        tv_cardId.setText(null);
+        iv_headphoto.setImageBitmap(null);
 
     }
 }

@@ -44,6 +44,11 @@ public class ConnectTest {
                     public void onResponseWiFiBitmap(boolean status) {
 
                     }
+
+                    @Override
+                    public void onConnectError() {
+
+                    }
                 }));
     }
 
@@ -77,6 +82,11 @@ public class ConnectTest {
                     public void onResponseWiFiBitmap(boolean status) {
 
                     }
+
+                    @Override
+                    public void onConnectError() {
+
+                    }
                 }));
     }
 
@@ -105,6 +115,11 @@ public class ConnectTest {
 
                     @Override
                     public void onResponseWiFiBitmap(boolean status) {
+
+                    }
+
+                    @Override
+                    public void onConnectError() {
 
                     }
                 }));
@@ -137,6 +152,11 @@ public class ConnectTest {
                     public void onResponseWiFiBitmap(boolean status) {
 
                     }
+
+                    @Override
+                    public void onConnectError() {
+
+                    }
                 }));
     }
 
@@ -165,6 +185,11 @@ public class ConnectTest {
 
                     @Override
                     public void onResponseWiFiBitmap(boolean status) {
+
+                    }
+
+                    @Override
+                    public void onConnectError() {
 
                     }
                 }));
@@ -203,6 +228,11 @@ public class ConnectTest {
 
                     @Override
                     public void onResponseWiFiBitmap(boolean status) {
+
+                    }
+
+                    @Override
+                    public void onConnectError() {
 
                     }
                 }));
